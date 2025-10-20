@@ -18,7 +18,7 @@ import { NITEStyle } from "../../lib/types";
 
 
 export const Homepage = ():HTMLElement => {
-    // Page 1
+  // Page 1
   const page = CreateNode("div") as HTMLDivElement;
   const text = CreateNode("h1") as HTMLHeadElement;
   const navbar = CreateNode("div") as HTMLDivElement;
@@ -170,7 +170,7 @@ export const Homepage = ():HTMLElement => {
     target:page,
     position:"bottomRight",
     icon:UseFontAwesomeIcon({
-        iconStyle:'fa fa-sign-out'
+      iconStyle:'fa fa-sign-out'
     }),
     onclick: () => {
       setDropBarState(!dropBarState());
@@ -196,7 +196,7 @@ export const Homepage = ():HTMLElement => {
     position:'fixed',
     bottom:'20px',
     right:'20px'
-  }
+  };
   Vanilla(back,{...style});
   SetChild(page2, back);
 
@@ -206,4 +206,4 @@ export const Homepage = ():HTMLElement => {
 
   SetChild(page2, h4);
   return page;
-}
+};

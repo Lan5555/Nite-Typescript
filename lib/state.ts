@@ -1,5 +1,5 @@
 import {NITEStyle} from "./types";
-import {prefersDark,darkShadow1} from './theme';
+import {prefersDark} from './theme';
 let stateIndex = 0;
 const stateStore: any[] = [];
 let globalRender: (() => void) | null = null;
@@ -44,13 +44,13 @@ export function resetStateIndex() {
  * @param {Function} App - The main app function to render.
  * @param {HTMLElement} rootElement - The root DOM element to render into.
  */
-export function render(App: () => void, rootElement: { innerHTML: string; }) {
+export function render(App: () => HTMLElement, rootElement: { innerHTML: string; }) {
   globalRender = () => {
     resetStateIndex(); // Reset the state index before rendering
     rootElement.innerHTML = ""; // Clear existing content
     const app = App();
-    if(app == null) return;
-    renderBody(app) // Render the main app
+    if(app === null) return;
+    renderBody(app); // Render the main app
   };
 
   globalRender(); // Initial render

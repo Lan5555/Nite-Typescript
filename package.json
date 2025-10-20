@@ -1,8 +1,8 @@
 {
-  "name": "nj-library",
-  "version": "2.1.7",
-  "description": "Excellent widgets to use and thousands of custom styles free for usage.",
-  "main": "index.js",
+  "name": "nite-typescript",
+  "version": "2.1.9",
+  "description": "An expressive UI component library offering dynamic theming, custom widgets, and smooth user interactions for modern web development.",
+  "main": "app.js",
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/Lan5555/Nite.git",
   "files": [
-    "index.js",
-    "app.js",
+    "app.ts",
     "layout",
     "lib",
     "public",
+    "src",
     "webpack.config.js",
     "global.css",
     "README.md",

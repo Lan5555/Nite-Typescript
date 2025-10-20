@@ -27,27 +27,27 @@ function createToastContainer(position: ToastOptions['position'] = 'topRight') {
 
     // Position container
     switch (position) {
-      case 'topLeft':
-        container.style.top = '10px';
-        container.style.left = '10px';
-        container.style.alignItems = 'flex-start';
-        break;
-      case 'topRight':
-        container.style.top = '10px';
-        container.style.right = '10px';
-        container.style.alignItems = 'flex-end';
-        break;
-      case 'bottomLeft':
-        container.style.bottom = '10px';
-        container.style.left = '10px';
-        container.style.alignItems = 'flex-start';
-        break;
-      case 'bottomRight':
-      default:
-        container.style.bottom = '10px';
-        container.style.right = '10px';
-        container.style.alignItems = 'flex-end';
-        break;
+    case 'topLeft':
+      container.style.top = '10px';
+      container.style.left = '10px';
+      container.style.alignItems = 'flex-start';
+      break;
+    case 'topRight':
+      container.style.top = '10px';
+      container.style.right = '10px';
+      container.style.alignItems = 'flex-end';
+      break;
+    case 'bottomLeft':
+      container.style.bottom = '10px';
+      container.style.left = '10px';
+      container.style.alignItems = 'flex-start';
+      break;
+    case 'bottomRight':
+    default:
+      container.style.bottom = '10px';
+      container.style.right = '10px';
+      container.style.alignItems = 'flex-end';
+      break;
     }
     document.body.appendChild(container);
   }
@@ -210,7 +210,7 @@ export const FloatingActionButton = (() => {
   function renderButton(config: FloatingActionButtonOptions) {
     const button = document.createElement('button');
     button.classList.add('floating');
-    button.innerHTML =  config.icon == null ? (config.text  || '<strong style="font-size: 22pt;">+</strong>') : '';
+    button.innerHTML =  config.icon === null ? (config.text  || '<strong style="font-size: 22pt;">+</strong>') : '';
     button.style.position = 'fixed';
     button.style.top = config.position?.includes('top') ? '30px' : 'auto';
     button.style.bottom = config.position?.includes('bottom') ? '80px' : 'auto';
@@ -218,7 +218,7 @@ export const FloatingActionButton = (() => {
     button.style.right = config.position?.includes('Right') ? '30px' : 'auto';
     button.style.color = config.color || 'white';
     button.style.backgroundColor = config.backgroundColor || 'plum';
-    (config.icon == null) ? null : button.appendChild(config.icon)
+    (config.icon === null) ? null : button.appendChild(config.icon!);
     button.addEventListener('click', () => {
       config.onclick?.();
       button.style.backgroundColor = 'grey';
