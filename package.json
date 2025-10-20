@@ -1,0 +1,56 @@
+{
+  "name": "nj-library",
+  "version": "2.1.7",
+  "description": "Excellent widgets to use and thousands of custom styles free for usage.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "postinstall": "node copy.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lan5555/Nite.git"
+  },
+  "author": "Nicholas Johnson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lan5555/Nite.git"
+  },
+  "homepage": "https://github.com/Lan5555/Nite.git",
+  "files": [
+    "index.js",
+    "app.js",
+    "layout",
+    "lib",
+    "public",
+    "webpack.config.js",
+    "global.css",
+    "README.md",
+    "eslint.config.mjs",
+    "copy.js"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@eslint/js": "^9.26.0",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.26.0",
+    "eslint-webpack-plugin": "^5.0.1",
+    "fs-extra": "^11.3.0",
+    "globals": "^16.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript-eslint": "^8.32.0",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "dotenv": "^10.0.0"
+  }
+}

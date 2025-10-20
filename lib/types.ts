@@ -1,0 +1,1 @@
+export type NITEStyle = Partial<CSSStyleDeclaration>

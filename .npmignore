@@ -1,0 +1,14 @@
+#node modules
+node_modules/
+
+#Build directory
+dist/
+
+#logs and temporary files
+npm-debug.log
+yarn-error.log
+*.log
+*.tsbuildinfo
+
+.env
+.eslintrc.js
