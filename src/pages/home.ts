@@ -185,7 +185,7 @@ export const Homepage = ():HTMLElement => {
 
   const h4 = CreateNode("h4") as HTMLElement;
   Text(h4, "Routing between pages is easy");
-  Style(h4, "text-white");
+  Style(h4, "text-white float");
 
   const back = Button({
     variant: "contained",
