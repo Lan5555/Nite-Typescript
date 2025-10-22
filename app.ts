@@ -1,7 +1,7 @@
-import { Homepage } from "./src/pages/home";
+import { initState } from "./src/pages/routes";
 
 export const App = (): HTMLElement => {
-  return Homepage();
+  return initState();
 };
 
 

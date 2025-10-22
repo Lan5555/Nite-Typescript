@@ -1,20 +1,18 @@
 import {
-  Button,
   RemoveClass,
   Row,
   Watch,
   SetChild,
   Style,
   CreateNode,
-  route,
   Vanilla,
   HandleEvent,
   Text,
   SwitchBar,
   UseFontAwesomeIcon,
-} from "../../lib/state";
-import { FloatingActionButton as FAB } from "../../lib/components";
-import { NITEStyle } from "../../lib/types";
+} from "../../../lib/state";
+import { FloatingActionButton as FAB } from "../../../lib/components";
+import { routeToPage } from "../routes";
 
 
 export const Homepage = ():HTMLElement => {
@@ -127,7 +125,7 @@ export const Homepage = ():HTMLElement => {
     if (index === 0) {
       setCount(prev => prev + 1);
     } else {
-      route.move(page, page2);
+      routeToPage(1);
     }
   };
 
@@ -178,32 +176,6 @@ export const Homepage = ():HTMLElement => {
   });
 
   
-  // Page 2
-  const page2 = CreateNode("div") as HTMLElement;
-
-  Style(page2, "fixed top-0 bottom-0 left-0 right-0 w-100 h-screen-full bg-black flex-container flex-col space");
-
-  const h4 = CreateNode("h4") as HTMLElement;
-  Text(h4, "Routing between pages is easy");
-  Style(h4, "text-white float");
-
-  const back = Button({
-    variant: "contained",
-    text: "Back",
-    icon:'sign-out'
-  });
-  const style:NITEStyle = {
-    position:'fixed',
-    bottom:'20px',
-    right:'20px'
-  };
-  Vanilla(back,{...style});
-  SetChild(page2, back);
-
-  HandleEvent(back, "click", () => {
-    route.move(page2, page);
-  });
-
-  SetChild(page2, h4);
+  
   return page;
 };

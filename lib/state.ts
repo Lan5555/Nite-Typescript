@@ -44,13 +44,12 @@ export function resetStateIndex() {
  * @param {Function} App - The main app function to render.
  * @param {HTMLElement} rootElement - The root DOM element to render into.
  */
-export function render(App: () => HTMLElement, rootElement: { innerHTML: string; }) {
+export function render(App: () => HTMLElement, rootElement: HTMLElement) {
   globalRender = () => {
     resetStateIndex(); // Reset the state index before rendering
     rootElement.innerHTML = ""; // Clear existing content
     const app = App();
-    if(app === null) return;
-    renderBody(app); // Render the main app
+    if(app !== null) rootElement.appendChild(app);
   };
 
   globalRender(); // Initial render
@@ -238,7 +237,8 @@ export const route = {
       currentPage.addEventListener("animationend", () => {
         currentPage.remove();
         newPage.style.animation = "fadeIn 0.1s";
-        document.body.appendChild(newPage);
+        const target = document.getElementById("app") as HTMLDivElement;
+        target.appendChild(newPage);
         history.pushState({ routeName }, '', `/${routeName}`);
       }, { once: true });
 
