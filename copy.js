@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const source = path.resolve(__dirname); // since you're inside nj-library
-const destination = path.resolve(__dirname, '../../nj-library'); // go up to project root
+const destination = path.resolve(__dirname, '../../nite-typescript'); // go up to project root
 
 function copyRecursive(src, dest) {
   const stats = fs.statSync(src);
