@@ -125,7 +125,7 @@ export const Homepage = ():HTMLElement => {
   // Drop down Toolkit
   const handleClick = (index: number): void => {
     if (index === 0) {
-      setCount(count() + 1);
+      setCount(prev => prev + 1);
     } else {
       route.move(page, page2);
     }

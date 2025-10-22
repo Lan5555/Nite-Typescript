@@ -810,11 +810,17 @@ export const UseSpriteSheet = () => {
 
 type Observer = () => void;
 
-export const Watch = <T>(initialValue: T): [() => T, (newValue: T) => void, (observer: Observer) => void] => {
+export const Watch = <T>(
+  initialValue: T
+): [() => T, (newValueOrUpdater: T | ((prev: T) => T)) => void, (observer: Observer) => void] => {
   let value: T = initialValue;
   const observers: Observer[] = [];
 
-  const set = (newValue: T): void => {
+  const set = (newValueOrUpdater: T | ((prev: T) => T)): void => {
+    const newValue = typeof newValueOrUpdater === 'function'
+      ? (newValueOrUpdater as (prev: T) => T)(value)
+      : newValueOrUpdater;
+
     if (newValue !== value) {
       value = newValue;
       notify();
@@ -831,6 +837,7 @@ export const Watch = <T>(initialValue: T): [() => T, (newValue: T) => void, (obs
 
   return [() => value, set, observe];
 };
+
 
 
 /**
