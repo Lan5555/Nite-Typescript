@@ -356,9 +356,9 @@ export const Column = (
   { children = [], callback = [] }: { children: HTMLElement[]; callback?: Array<(() => void) | null> }
 ): HTMLDivElement => {
   const div = document.createElement('div');
-  div.style.display = 'grid';
-  div.style.placeContent = axis;
-  div.style.placeItems = 'center';
+  div.style.display = 'flex';
+  div.style.justifyContent = axis;
+  div.style.alignItems = 'center';
 
   children.forEach((element, index) => {
     div.appendChild(element);
@@ -1667,3 +1667,115 @@ observeMode(() => {
 });
 
 export { darkMode, setDarkMode, observeMode };
+
+// decorators
+
+type ValidatorFn = (value: any, propertyKey: string) => void;
+
+const validatorsMap = new WeakMap<any, Record<string, ValidatorFn[]>>();
+
+function addValidator(
+  target: any,
+  propertyKey: string,
+  validator: ValidatorFn
+) {
+  if (!validatorsMap.has(target)) {
+    validatorsMap.set(target, {});
+  }
+  const propValidators = validatorsMap.get(target)!;
+  if (!propValidators[propertyKey]) {
+    propValidators[propertyKey] = [];
+  }
+  propValidators[propertyKey].push(validator);
+}
+
+export function validate(instance: any) {
+  let proto = Object.getPrototypeOf(instance);
+
+  while (proto) {
+    const propValidators = validatorsMap.get(proto);
+    if (propValidators) {
+      for (const key of Object.keys(propValidators)) {
+        for (const validator of propValidators[key]) {
+          validator(instance[key], key);
+        }
+      }
+    }
+    proto = Object.getPrototypeOf(proto); // go up the chain
+  }
+}
+
+
+/** New decorator signatures for TS5+ */
+export function IsInt() {
+  return function (value: any, context: ClassFieldDecoratorContext) {
+    const key = context.name.toString();
+    addValidator(context.constructor.prototype, key, (v) => {
+      if (!Number.isInteger(v)) throw new Error(`${key} must be an integer`);
+    });
+  };
+}
+
+export function IsPositive() {
+  return function (value: any, context: ClassFieldDecoratorContext) {
+    const key = context.name.toString();
+    addValidator(context.constructor.prototype, key, (v) => {
+      if (typeof v !== 'number' || v <= 0)
+        throw new Error(`${key} must be a positive number`);
+    });
+  };
+}
+
+export function IsEmail() {
+  return function (value: any, context: ClassFieldDecoratorContext) {
+    const key = context.name.toString();
+    addValidator(context.constructor.prototype, key, (v) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (typeof v !== 'string' || !emailRegex.test(v)) {
+        throw new Error(`${key} must be a valid email`);
+      }
+    });
+  };
+}
+
+export function IsPassword(options: { minLength?: number; requireSpecial?: boolean } = {}) {
+  const { minLength = 8, requireSpecial = false } = options;
+  return function (value: any, context: ClassFieldDecoratorContext) {
+    const key = context.name.toString();
+    addValidator(context.constructor.prototype, key, (v) => {
+      if (typeof v !== 'string') throw new Error(`${key} must be a string`);
+      if (v.length < minLength)
+        throw new Error(`${key} must be at least ${minLength} characters`);
+      if (requireSpecial && !/[!@#$%^&*(),.?":{}|<>]/.test(v))
+        throw new Error(`${key} must contain at least one special character`);
+    });
+  };
+}
+
+// sizedBox.
+
+export type Axis = 'width' | 'height';
+
+/**
+ * Creates a spacer HTML element with a fixed width or height.
+ * @param axis - 'width' for horizontal, 'height' for vertical
+ * @param value - size in pixels
+ * @returns HTMLDivElement
+ */
+export function SizedBox(axis: Axis, value: number): HTMLDivElement {
+  if (typeof value !== 'number' || value < 0) {
+    throw new Error('Value must be a non-negative number');
+  }
+
+  const spacer = document.createElement('div');
+
+  if (axis === 'width') {
+    spacer.style.width = `${value}px`;
+  } else if (axis === 'height') {
+    spacer.style.height = `${value}px`;
+  } else {
+    throw new Error("Axis must be 'width' or 'height'");
+  }
+
+  return spacer;
+}

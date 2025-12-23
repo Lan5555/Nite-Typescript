@@ -44,7 +44,7 @@ export const Homepage = ():HTMLElement => {
     activeTrackColor: "white",
     inactiveColor: "white",
     inActiveTrackColor: "plum",
-    isClicked: (value: boolean) => handleValue(),
+    isClicked: () => handleValue(),
   });
 
   Text(mode, "Light mode");
@@ -175,7 +175,6 @@ export const Homepage = ():HTMLElement => {
     },
   });
 
-  
-  
+
   return page;
 };
