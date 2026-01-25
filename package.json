@@ -27,7 +27,6 @@
     "global.css",
     "README.md",
     "eslint.config.mjs",
-    "copy.js",
     "tsconfig.json"
   ],
   "devDependencies": {
