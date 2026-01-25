@@ -1,12 +1,11 @@
 {
   "name": "nite-typescript",
-  "version": "1.0.5",
+  "version": "1.0.9",
   "description": "An expressive UI component library offering dynamic theming, custom widgets, and smooth user interactions for modern web development.",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production",
-    "postinstall": "node copy.js"
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",

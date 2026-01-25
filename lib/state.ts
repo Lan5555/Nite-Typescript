@@ -1779,3 +1779,25 @@ export function SizedBox(axis: Axis, value: number): HTMLDivElement {
 
   return spacer;
 }
+
+//Net response
+interface Net{
+  success:boolean;
+  message:string;
+  data:Record<string,any>
+}
+export class NetResponse {
+  constructor(private readonly response: Net) {}
+
+  get data(): Record<string,any> {
+    return this.response.data;
+  }
+
+  get success(): boolean {
+    return this.response.success;
+  }
+
+  get message(): string {
+    return this.response.message;
+  }
+}
