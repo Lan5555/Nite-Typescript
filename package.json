@@ -1,6 +1,6 @@
 {
   "name": "nite-typescript",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "An expressive UI component library offering dynamic theming, custom widgets, and smooth user interactions for modern web development.",
   "main": "app.ts",
   "scripts": {
